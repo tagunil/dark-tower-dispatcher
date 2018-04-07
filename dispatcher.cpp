@@ -5,10 +5,12 @@ Dispatcher::Dispatcher()
 }
 
 void Dispatcher::init(const InfluenceTable *influence_table,
-                      const EmotionTable *emotion_table)
+                      const EmotionTable *emotion_table,
+                      const CharacterTable *character_table)
 {
     influence_table_ = influence_table;
     emotion_table_ = emotion_table;
+    character_table_ = character_table;
 }
 
 void Dispatcher::handle_radio_packet(uint8_t influence_id,
