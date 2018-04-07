@@ -7,11 +7,14 @@
 #include "emotiontable.h"
 #include "charactertable.h"
 
-#define BEGIN(id) (id)
-#define END(id) ((id) + InfluenceTable::MAX_INFLUENCE_COUNT + 1)
+#define BEGIN_ID(id) (id)
+#define END_ID(id) (BEGIN_ID(id) + InfluenceTable::MAX_INFLUENCE_COUNT + 1)
 
-#define DISPATCH_BEGIN(id) me->dispatcher->begin_influence((id))
-#define DISPATCH_END(id) me->dispatcher->end_influence((id))
+#define BEGIN(name) (BEGIN_ID(name ## _ID))
+#define END(name) (END_ID(name ## _ID))
+
+#define DISPATCH_BEGIN(name) me->dispatcher->begin_influence((name ## _ID))
+#define DISPATCH_END(name) me->dispatcher->end_influence((name ## _ID))
 
 class Dispatcher
 {
