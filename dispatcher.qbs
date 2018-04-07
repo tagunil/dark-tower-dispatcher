@@ -17,6 +17,8 @@ Project {
             "influencetable.cpp",
             "influencetable.h",
             "main.cpp",
+            "reasons.cpp",
+            "reasons.h",
         ]
 
         Group {
