@@ -26,7 +26,7 @@ public:
                              int8_t strength);
 
     void begin_influence(size_t id,
-                         uint8_t parameter,
+                         uint8_t parameter = 0,
                          int8_t timeout = -1);
     void end_influence(size_t id);
 
