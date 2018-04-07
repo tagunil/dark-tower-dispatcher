@@ -32,6 +32,8 @@ public:
                          int8_t timeout = -1);
     void end_influence(size_t id);
 
+    bool influence_active(size_t id);
+
     void tick();
 
 private:

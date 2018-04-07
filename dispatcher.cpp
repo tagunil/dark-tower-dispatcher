@@ -59,6 +59,11 @@ void Dispatcher::end_influence(size_t id)
     influence_states_[id].remaining_time = -1;
 }
 
+bool Dispatcher::influence_active(size_t id)
+{
+    return influence_states_[id].active;
+}
+
 void Dispatcher::tick()
 {
     const size_t influence_count = influence_table_->influence_count();
