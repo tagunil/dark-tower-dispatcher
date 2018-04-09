@@ -15,12 +15,17 @@
 #define BEGIN(name) (BEGIN_BY_ID(name ## _ID))
 #define END(name) (END_BY_ID(name ## _ID))
 
+#define DISPATCH_BEGIN_WITH_PARAM(name, param) \
+    me->dispatcher->begin_influence((name ## _ID), (param))
+#define DISPATCH_ONESHOT_WITH_PARAM(name, param) \
+    me->dispatcher->begin_influence((name ## _ID), (param), 0)
+
 #define DISPATCH_BEGIN(name) \
     me->dispatcher->begin_influence((name ## _ID))
-#define DISPATCH_END(name) \
-    me->dispatcher->end_influence((name ## _ID))
 #define DISPATCH_ONESHOT(name) \
     me->dispatcher->begin_influence((name ## _ID), 0, 0)
+#define DISPATCH_END(name) \
+    me->dispatcher->end_influence((name ## _ID))
 
 class Dispatcher
 {
