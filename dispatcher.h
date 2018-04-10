@@ -10,7 +10,7 @@
 #define BEGIN_BY_ID(id) \
     (id)
 #define END_BY_ID(id) \
-    (END_BY_ID(id) + InfluenceTable::MAX_INFLUENCE_COUNT + 1)
+    (BEGIN_BY_ID(id) + InfluenceTable::MAX_INFLUENCE_COUNT + 1)
 
 #define BEGIN(name) (BEGIN_BY_ID(name ## _ID))
 #define END(name) (END_BY_ID(name ## _ID))
