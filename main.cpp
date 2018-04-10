@@ -1,12 +1,17 @@
 #include <cstddef>
 #include <cstdint>
 #include <cstdio>
+#include <cstring>
+#include <cstdlib>
+#include <vector>
 
 #include "csvtable.h"
 #include "emotiontable.h"
 #include "influencetable.h"
 #include "charactertable.h"
 #include "dispatcher.h"
+
+const size_t COMMAND_BUFFER_SIZE = 256;
 
 size_t read_callback(void *file_context, uint8_t *buffer, size_t length)
 {
@@ -48,7 +53,7 @@ int main(int argc, char *argv[])
 
     fclose(influence_file);
 
-    FILE *character_file = fopen("Reasons.csv", "r");
+    FILE *character_file = fopen("Characters.csv", "r");
     if (!character_file) {
         fprintf(stderr, "Cannot open character file!\n");
         return 1;
@@ -100,8 +105,82 @@ int main(int argc, char *argv[])
 
     printf("\n");
 
+    printf("Starting dispatcher...\n");
     Dispatcher dispatcher;
     dispatcher.init(&influence_table, &emotion_table, &character_table);
+
+    char command[COMMAND_BUFFER_SIZE];
+
+    while (true) {
+        printf(">> ");
+
+        if (fgets(command, COMMAND_BUFFER_SIZE, stdin) == nullptr) {
+            break;
+        }
+
+        std::vector<const char *> tokens;
+        char *handle = command;
+
+        while (true) {
+            char *token = strtok(handle, " \t\r\n");
+            if (token == nullptr) {
+                break;
+            }
+
+            handle = nullptr;
+
+            if (strlen(token) > 0) {
+                tokens.push_back(token);
+            }
+        }
+
+        if (tokens.size() == 0) {
+            continue;
+        }
+
+        switch (tokens[0][0]) {
+        case 't':
+            if (tokens.size() >= 2) {
+                int ticks = atoi(tokens[1]);
+                while (ticks > 0) {
+                    printf("Dispatching tick...\n");
+                    dispatcher.tick();
+                    ticks--;
+                }
+            } else {
+                printf("Dispatching tick...\n");
+                dispatcher.tick();
+            }
+            break;
+        case 'r':
+            if (tokens.size() >= 2) {
+                uint8_t influence_id = static_cast<uint8_t>(atoi(tokens[1]));
+                uint8_t parameter = 0;
+                int8_t timeout = -1;
+
+                if (tokens.size() >= 3) {
+                    parameter = static_cast<uint8_t>(atoi(tokens[2]));
+
+                    if (tokens.size() >= 4) {
+                        timeout = static_cast<int8_t>(atoi(tokens[3]));
+                    }
+                }
+
+                printf("Dispatching radio packet...\n");
+                dispatcher.handle_radio_packet(influence_id,
+                                               parameter,
+                                               timeout);
+            } else {
+                printf("Insufficient parameters!\n");
+            }
+            break;
+        case 'q':
+            printf("Exiting...\n");
+            return 0;
+        default:
+            printf("Unknown command!\n");
+        }
+    }
 
     return 0;
 }
