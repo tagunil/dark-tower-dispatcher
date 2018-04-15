@@ -13,10 +13,6 @@ void Dispatcher::init(const InfluenceTable *influence_table,
     influence_table_ = influence_table;
     emotion_table_ = emotion_table;
     character_table_ = character_table;
-
-    if (influence_table_) {
-        prepare_reasons(*influence_table_);
-    }
 }
 
 void Dispatcher::handle_radio_packet(uint8_t influence_id,
