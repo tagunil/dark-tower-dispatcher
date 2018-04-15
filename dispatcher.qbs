@@ -17,6 +17,9 @@ Project {
             "influencetable.cpp",
             "influencetable.h",
             "main.cpp",
+            "qhsm.c",
+            "qhsm.h",
+            "qpc.h",
             "reasons.h",
         ]
 
