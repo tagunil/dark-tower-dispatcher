@@ -47,6 +47,8 @@ public:
                              uint8_t parameter,
                              int8_t strength);
 
+    void handle_nfc_packet(uint8_t influence_id);
+
     void begin_influence(size_t id,
                          uint8_t parameter = 0,
                          int8_t timeout = -1);

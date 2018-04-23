@@ -32,6 +32,17 @@ void Dispatcher::handle_radio_packet(uint8_t influence_id,
     begin_influence(influence_id, parameter, influence->timeout);
 }
 
+void Dispatcher::handle_nfc_packet(uint8_t influence_id)
+{
+    const InfluenceTable::Influence *influence;
+    influence = influence_table_->influence(influence_id);
+    if (!influence || !(influence->valid)) {
+        return;
+    }
+
+    begin_influence(influence_id, 0, 0);
+}
+
 void Dispatcher::begin_influence(size_t id,
                                  uint8_t parameter,
                                  int8_t timeout)
