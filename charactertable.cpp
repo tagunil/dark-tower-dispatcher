@@ -3,6 +3,8 @@
 #include <cstring>
 #include <cstdlib>
 
+#include "localcharacter.h"
+
 CharacterTable::CharacterTable()
     : character_count_(0)
 {
@@ -10,7 +12,8 @@ CharacterTable::CharacterTable()
 
 void CharacterTable::init(void *file_context,
                           CsvTable *table,
-                          const char *character_name)
+                          const char *local_character_name,
+                          LocalCharacter *local_character)
 {
     if (!table->open(file_context)) {
         return;
@@ -18,6 +21,8 @@ void CharacterTable::init(void *file_context,
 
     memset(characters_, 0, sizeof(characters_));
     character_count_ = 0;
+
+    memset(local_character, 0, sizeof(LocalCharacter));
 
     while (table->parse_line()) {
         size_t id;
@@ -46,8 +51,25 @@ void CharacterTable::init(void *file_context,
             continue;
         }
 
-        if (strcmp(name, character_name) == 0) {
-            //TODO: fill my own parameters
+        if (strcmp(name, local_character_name) == 0) {
+            const char *dogan_field = table->field("dogan");
+            if (dogan_field) {
+                int dogan_value = atoi(dogan_field);
+                if (dogan_value > MAX_DOGAN) {
+                    dogan_value = MAX_DOGAN;
+                } else if (dogan_value < MIN_DOGAN) {
+                    dogan_value = MIN_DOGAN;
+                }
+
+                local_character->dogan = dogan_value;
+            }
+
+            const char *manni_field = table->field("isManni");
+            if (manni_field) {
+                int manni_value = atoi(manni_field);
+
+                local_character->manni = manni_value != 0;
+            }
         }
 
         characters_[id].valid = true;

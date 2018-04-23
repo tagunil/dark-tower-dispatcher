@@ -6,6 +6,7 @@
 #include "influencetable.h"
 #include "emotiontable.h"
 #include "charactertable.h"
+#include "localcharacter.h"
 
 #define BEGIN_BY_ID(id) \
     (id)
@@ -41,7 +42,8 @@ public:
 
     void init(const InfluenceTable *influence_table,
               const EmotionTable *emotion_table,
-              const CharacterTable *character_table);
+              const CharacterTable *character_table,
+              LocalCharacter *local_character);
 
     void handle_radio_packet(uint8_t influence_id,
                              uint8_t parameter,
@@ -64,4 +66,6 @@ private:
     const InfluenceTable *influence_table_;
     const EmotionTable *emotion_table_;
     const CharacterTable *character_table_;
+
+    LocalCharacter *local_character_;
 };

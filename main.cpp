@@ -29,9 +29,12 @@ int main(int argc, char *argv[])
     }
 
     CsvTable csv_table(&read_callback);
+
     EmotionTable emotion_table;
     InfluenceTable influence_table;
     CharacterTable character_table;
+
+    LocalCharacter local_character;
 
     FILE *emotion_file = fopen("Emotions.csv", "r");
     if (!emotion_file) {
@@ -39,7 +42,8 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    emotion_table.init(emotion_file, &csv_table);
+    emotion_table.init(emotion_file,
+                       &csv_table);
 
     fclose(emotion_file);
 
@@ -49,7 +53,9 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    influence_table.init(influence_file, &csv_table, &emotion_table);
+    influence_table.init(influence_file,
+                         &csv_table,
+                         &emotion_table);
 
     fclose(influence_file);
 
@@ -59,7 +65,10 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    character_table.init(character_file, &csv_table, argv[1]);
+    character_table.init(character_file,
+                         &csv_table,
+                         argv[1],
+                         &local_character);
 
     fclose(character_file);
 
@@ -107,7 +116,10 @@ int main(int argc, char *argv[])
 
     printf("Starting dispatcher...\n");
     Dispatcher dispatcher;
-    dispatcher.init(&influence_table, &emotion_table, &character_table);
+    dispatcher.init(&influence_table,
+                    &emotion_table,
+                    &character_table,
+                    &local_character);
 
     char command[COMMAND_BUFFER_SIZE];
 

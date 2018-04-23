@@ -16,6 +16,7 @@ Project {
             "emotiontable.h",
             "influencetable.cpp",
             "influencetable.h",
+            "localcharacter.h",
             "main.cpp",
             "qhsm.c",
             "qhsm.h",

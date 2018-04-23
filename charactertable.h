@@ -5,6 +5,8 @@
 
 #include "csvtable.h"
 
+struct LocalCharacter;
+
 class CharacterTable
 {
 public:
@@ -25,7 +27,8 @@ public:
 
     void init(void *file_context,
               CsvTable *table,
-              const char *character_name);
+              const char *local_character_name,
+              LocalCharacter *local_character);
 
     size_t character_count() const
     {

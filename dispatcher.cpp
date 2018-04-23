@@ -8,11 +8,14 @@ Dispatcher::Dispatcher()
 
 void Dispatcher::init(const InfluenceTable *influence_table,
                       const EmotionTable *emotion_table,
-                      const CharacterTable *character_table)
+                      const CharacterTable *character_table,
+                      LocalCharacter *local_character)
 {
     influence_table_ = influence_table;
     emotion_table_ = emotion_table;
     character_table_ = character_table;
+
+    local_character_ = local_character;
 }
 
 void Dispatcher::handle_radio_packet(uint8_t influence_id,
