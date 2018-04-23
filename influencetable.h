@@ -18,7 +18,7 @@ public:
     {
         bool valid;
         int8_t strength;
-        int8_t timeout;
+        int16_t timeout;
         int8_t dogan_effect;
         uint8_t emotion;
         char name[MAX_INFLUENCE_NAME_LENGTH + 1];

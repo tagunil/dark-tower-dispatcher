@@ -33,7 +33,7 @@ void InfluenceTable::init(void *file_context,
         size_t id;
         const char *name;
         int8_t strength;
-        int8_t timeout;
+        int16_t timeout;
         int8_t dogan_effect;
         uint8_t emotion = EmotionTable::INVALID_EMOTION;
 
@@ -86,11 +86,11 @@ void InfluenceTable::init(void *file_context,
         if (timeout_value < -1) {
             continue;
         }
-        if (timeout_value > INT8_MAX) {
+        if (timeout_value > INT16_MAX) {
             continue;
         }
 
-        timeout = static_cast<int8_t>(timeout_value);
+        timeout = static_cast<int16_t>(timeout_value);
 
         const char *dogan_effect_field = table->field("doganAmount");
         if (!dogan_effect_field) {

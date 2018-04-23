@@ -33,8 +33,7 @@ class Dispatcher
 public:
     struct InfluenceState
     {
-        bool active;
-        int8_t remaining_time;
+        int16_t remaining_time;
     };
 
 public:
@@ -53,7 +52,7 @@ public:
 
     void begin_influence(size_t id,
                          uint8_t parameter = 0,
-                         int8_t timeout = -1);
+                         int16_t timeout = -1);
     void end_influence(size_t id);
 
     bool influence_active(size_t id);

@@ -48,13 +48,12 @@ void Dispatcher::handle_nfc_packet(uint8_t influence_id)
 
 void Dispatcher::begin_influence(size_t id,
                                  uint8_t parameter,
-                                 int8_t timeout)
+                                 int16_t timeout)
 {
     //TODO: send begin with respect to character codes
     (void)parameter;
 
     if (timeout != 0) {
-        influence_states_[id].active = true;
         influence_states_[id].remaining_time = timeout;
     } else {
         end_influence(id);
@@ -65,13 +64,12 @@ void Dispatcher::end_influence(size_t id)
 {
     //TODO: send end with respect to character codes
 
-    influence_states_[id].active = false;
-    influence_states_[id].remaining_time = -1;
+    influence_states_[id].remaining_time = 0;
 }
 
 bool Dispatcher::influence_active(size_t id)
 {
-    return influence_states_[id].active;
+    return influence_states_[id].remaining_time != 0;
 }
 
 void Dispatcher::tick()
@@ -83,7 +81,7 @@ void Dispatcher::tick()
     for (size_t influence_id = 0;
          influence_id < influence_count;
          influence_id++) {
-        if (influence_states_[influence_id].active) {
+        if (influence_states_[influence_id].remaining_time != 0) {
             const InfluenceTable::Influence *influence;
             influence = influence_table_->influence(influence_id);
             if (influence && influence->valid) {
