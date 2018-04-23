@@ -168,20 +168,20 @@ int main(int argc, char *argv[])
             if (tokens.size() >= 2) {
                 uint8_t influence_id = static_cast<uint8_t>(atoi(tokens[1]));
                 uint8_t parameter = 0;
-                int8_t timeout = -1;
+                int8_t strength = -1;
 
                 if (tokens.size() >= 3) {
                     parameter = static_cast<uint8_t>(atoi(tokens[2]));
 
                     if (tokens.size() >= 4) {
-                        timeout = static_cast<int8_t>(atoi(tokens[3]));
+                        strength = static_cast<int8_t>(atoi(tokens[3]));
                     }
                 }
 
                 printf("Dispatching radio packet...\n");
                 dispatcher.handle_radio_packet(influence_id,
                                                parameter,
-                                               timeout);
+                                               strength);
             } else {
                 printf("Insufficient parameters!\n");
             }
