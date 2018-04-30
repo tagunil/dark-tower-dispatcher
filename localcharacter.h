@@ -44,6 +44,17 @@ public:
         }
     }
 
+    bool empty() const
+    {
+        uint32_t accum = 0;
+
+        for (size_t i = 0; i < sizeof(data_) / 4; i++) {
+            accum |= data_[i];
+        }
+
+        return accum == 0;
+    }
+
     void clear()
     {
         memset(data_, 0, sizeof(data_));
