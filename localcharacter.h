@@ -84,8 +84,9 @@ private:
 struct LocalCharacter
 {
     size_t id;
-    bool manni;
-    int dogan;
     KaTetLinks ka_tet_links;
     KaTetCounters ka_tet_counters;
+    int dogan;
+    bool manni;
+    bool dead;
 };
