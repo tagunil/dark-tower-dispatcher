@@ -6,6 +6,7 @@ Project {
     CppApplication {
         consoleApplication: true
         files: [
+            "bsp.h",
             "charactertable.cpp",
             "charactertable.h",
             "csvtable.cpp",
@@ -22,6 +23,7 @@ Project {
             "qhsm.h",
             "qpc.h",
             "reasons.h",
+            "stubs.cpp",
         ]
 
         Group {
