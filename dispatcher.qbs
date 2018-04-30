@@ -23,6 +23,7 @@ Project {
             "qhsm.h",
             "qpc.h",
             "reasons.h",
+            "signals.h",
             "stubs.cpp",
         ]
 
