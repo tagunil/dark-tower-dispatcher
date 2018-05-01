@@ -4,6 +4,19 @@
 #include "signals.h"
 #include "reasons.h"
 
+enum Buttons
+{
+    A,
+    B,
+    C,
+    L,
+    E,
+    R,
+    X,
+    Y,
+    Z
+};
+
 Dispatcher::Dispatcher()
 {   
 }
@@ -50,9 +63,28 @@ void Dispatcher::handle_button(int id, bool long_press)
     ScreenQEvt screen_event = {{BTN_PRESSED_SIG}, 0, false, false};
     QMSM_DISPATCH(&(screen_sm_.super), &(screen_event.super));
 
-    //TODO: dispatch different buttons
-    (void)id;
     (void)long_press;
+
+    switch (id) {
+    case Buttons::A:
+        break;
+    case Buttons::B:
+        break;
+    case Buttons::C:
+        break;
+    case Buttons::L:
+        break;
+    case Buttons::E:
+        break;
+    case Buttons::R:
+        break;
+    case Buttons::X:
+        break;
+    case Buttons::Y:
+        break;
+    case Buttons::Z:
+        break;
+    }
 }
 
 void Dispatcher::handle_radio_packet(uint8_t influence_id,
