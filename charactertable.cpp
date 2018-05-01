@@ -24,6 +24,8 @@ void CharacterTable::init(void *file_context,
 
     memset(local_character, 0, sizeof(LocalCharacter));
 
+    char ka_tet_list[MAX_KA_TET_LIST_LENGTH + 1] = {};
+
     while (table->parse_line()) {
         size_t id;
         const char *name;
@@ -81,6 +83,11 @@ void CharacterTable::init(void *file_context,
 
                 local_character->manni = manni_value != 0;
             }
+
+            const char *ka_tet_field = table->field("kaTet");
+            if (ka_tet_field) {
+                strncpy(ka_tet_list, ka_tet_field, MAX_KA_TET_LIST_LENGTH);
+            }
         }
 
         characters_[id].valid = true;
@@ -91,7 +98,27 @@ void CharacterTable::init(void *file_context,
         }
     }
 
-    //TODO: ka-tet linking
+    char *handle = ka_tet_list;
+
+    while (true) {
+        char *name = strtok(handle, ":");
+        handle = nullptr;
+        if (!name) {
+            break;
+        }
+        if (name[0] == '\0') {
+            continue;
+        }
+
+        if (strcmp(name, local_character_name) != 0) {
+            size_t id = find(name);
+            if (id == INVALID_CHARACTER) {
+                continue;
+            }
+
+            local_character->ka_tet_links.set(id, true);
+        }
+    }
 
     table->close();
 }

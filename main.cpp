@@ -112,7 +112,26 @@ int main(int argc, char *argv[])
         const CharacterTable::Character *character;
         character = character_table.character(index);
         if (character && character->valid) {
-            printf("%s = %u\n", character->name, static_cast<unsigned int>(index));
+            printf("%s = %u\n",
+                   character->name,
+                   static_cast<unsigned int>(index));
+        }
+    }
+
+    printf("\n");
+
+    printf("Ka-tets:\n");
+
+    for (size_t index = 0;
+         index < KaTetLinks::SIZE;
+         index++) {
+        if (local_character.ka_tet_links.get(index)) {
+            const CharacterTable::Character *character = character_table.character(index);
+            if (character && character->valid) {
+                printf("%s = %u\n",
+                       character->name,
+                       static_cast<unsigned int>(index));
+            }
         }
     }
 
