@@ -71,20 +71,45 @@ void Dispatcher::handle_button(int id, bool long_press)
     case Buttons::A:
         break;
     case Buttons::B:
+        if (long_press) {
+            screen_event = {{BTN_DEATH_LONG_SIG}, 0, false, false};
+            QMSM_DISPATCH(&(screen_sm_.super), &(screen_event.super));
+        } else {
+            screen_event = {{BTN_NEXT_PICTURE_SIG}, 0, false, false};
+            QMSM_DISPATCH(&(screen_sm_.super), &(screen_event.super));
+        }
         break;
     case Buttons::C:
+        if (long_press) {
+            screen_event = {{BTN_POWER_LONG_SIG}, 0, false, false};
+            QMSM_DISPATCH(&(screen_sm_.super), &(screen_event.super));
+        }
         break;
     case Buttons::L:
         break;
     case Buttons::E:
+        if (long_press) {
+            screen_event = {{BTN_ENABLE_LONG_SIG}, 0, false, false};
+            QMSM_DISPATCH(&(screen_sm_.super), &(screen_event.super));
+        }
         break;
     case Buttons::R:
+        screen_event = {{BTN_DOGAN_SIG}, 0, false, false};
+        QMSM_DISPATCH(&(screen_sm_.super), &(screen_event.super));
         break;
     case Buttons::X:
+        screen_event = {{BTN_UP_SIG}, 0, false, false};
+        QMSM_DISPATCH(&(screen_sm_.super), &(screen_event.super));
         break;
     case Buttons::Y:
+        screen_event = {{BTN_DOWN_SIG}, 0, false, false};
+        QMSM_DISPATCH(&(screen_sm_.super), &(screen_event.super));
         break;
     case Buttons::Z:
+        if (long_press) {
+            screen_event = {{BTN_HYPNOSIS_LONG_SIG}, 0, false, false};
+            QMSM_DISPATCH(&(screen_sm_.super), &(screen_event.super));
+        }
         break;
     }
 
