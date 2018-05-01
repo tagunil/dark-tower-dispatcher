@@ -54,8 +54,6 @@ void CharacterTable::init(void *file_context,
         if (strcmp(name, local_character_name) == 0) {
             local_character->id = id;
 
-            local_character->corrupted = false;
-
             const char *dogan_field = table->field("dogan");
             if (dogan_field) {
                 int dogan_value = atoi(dogan_field);
@@ -67,6 +65,15 @@ void CharacterTable::init(void *file_context,
 
                 local_character->dogan = dogan_value;
             }
+
+            const char *dead_field = table->field("isDead");
+            if (dead_field) {
+                int dead_value = atoi(dead_field);
+
+                local_character->dead = dead_value != 0;
+            }
+
+            local_character->corrupted = false;
 
             const char *manni_field = table->field("isManni");
             if (manni_field) {
