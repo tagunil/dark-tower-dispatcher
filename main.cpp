@@ -80,7 +80,9 @@ int main(int argc, char *argv[])
         const InfluenceTable::Influence *influence;
         influence = influence_table.influence(index);
         if (influence && influence->valid) {
-            printf("%s = %zu\n", influence->name, index);
+            printf("%s = %u\n",
+                   influence->name,
+                   static_cast<unsigned int>(index));
         }
     }
 
@@ -94,7 +96,9 @@ int main(int argc, char *argv[])
         const EmotionTable::Emotion *emotion;
         emotion = emotion_table.emotion(index);
         if (emotion && emotion->valid) {
-            printf("%s = %zu\n", emotion->name, index);
+            printf("%s = %u\n",
+                   emotion->name,
+                   static_cast<unsigned int>(index));
         }
     }
 
@@ -108,7 +112,7 @@ int main(int argc, char *argv[])
         const CharacterTable::Character *character;
         character = character_table.character(index);
         if (character && character->valid) {
-            printf("%s = %zu\n", character->name, index);
+            printf("%s = %u\n", character->name, static_cast<unsigned int>(index));
         }
     }
 
