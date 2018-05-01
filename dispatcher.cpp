@@ -178,12 +178,11 @@ bool Dispatcher::influence_active(size_t id)
 
 void Dispatcher::tick()
 {
-    const size_t influence_count = influence_table_->influence_count();
-
-    int dogan_effect = 0;
+    static const int DEFAULT_DOGAN_EFFECT = -1;
+    int dogan_effect = DEFAULT_DOGAN_EFFECT;
 
     for (size_t influence_id = 0;
-         influence_id < influence_count;
+         influence_id < influence_table_->influence_count();
          influence_id++) {
         if (influence_states_[influence_id].remaining_time != 0) {
             const InfluenceTable::Influence *influence;
