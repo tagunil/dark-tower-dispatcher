@@ -7,6 +7,8 @@ Project {
         consoleApplication: true
         files: [
             "bsp.h",
+            "character.cpp",
+            "character.h",
             "charactertable.cpp",
             "charactertable.h",
             "csvtable.cpp",
@@ -17,12 +19,18 @@ Project {
             "emotiontable.h",
             "influencetable.cpp",
             "influencetable.h",
+            "kaCounter.cpp",
+            "kaCounter.h",
+            "kaTet.cpp",
+            "kaTet.h",
             "localcharacter.h",
             "main.cpp",
             "qhsm.c",
             "qhsm.h",
             "qpc.h",
             "reasons.h",
+            "screen.cpp",
+            "screen.h",
             "signals.h",
             "stubs.cpp",
         ]

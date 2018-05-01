@@ -8,6 +8,11 @@
 #include "charactertable.h"
 #include "localcharacter.h"
 
+#include "character.h"
+#include "kaCounter.h"
+#include "kaTet.h"
+#include "screen.h"
+
 #define BEGIN_BY_ID(id) \
     (id)
 #define END_BY_ID(id) \
@@ -44,6 +49,8 @@ public:
               const CharacterTable *character_table,
               LocalCharacter *local_character);
 
+    void handle_button(int id, bool long_press = false);
+
     void handle_radio_packet(uint8_t influence_id,
                              uint8_t parameter,
                              int8_t strength);
@@ -67,4 +74,11 @@ private:
     const CharacterTable *character_table_;
 
     LocalCharacter *local_character_;
+
+    Character character_sm_;
+    KaCounter ka_counter_sm_;
+    KaTet ka_tet_sm_;
+    Screen screen_sm_;
+
+    int ticks_;
 };
