@@ -186,6 +186,31 @@ int main(int argc, char *argv[])
                 printf("Insufficient parameters!\n");
             }
             break;
+        case 'n':
+            if (tokens.size() >= 2) {
+                uint8_t influence_id = static_cast<uint8_t>(atoi(tokens[1]));
+
+                printf("Dispatching nfc packet...\n");
+                dispatcher.handle_nfc_packet(influence_id);
+            } else {
+                printf("Insufficient parameters!\n");
+            }
+            break;
+        case 'b':
+            if (tokens.size() >= 2) {
+                uint8_t button_id = static_cast<uint8_t>(atoi(tokens[1]));
+                bool long_press = false;
+
+                if (tokens.size() >= 3) {
+                    long_press = static_cast<bool>(atoi(tokens[2]));
+                }
+
+                printf("Dispatching button press...\n");
+                dispatcher.handle_button(button_id, long_press);
+            } else {
+                printf("Insufficient parameters!\n");
+            }
+            break;
         case 'q':
             printf("Exiting...\n");
             return 0;
