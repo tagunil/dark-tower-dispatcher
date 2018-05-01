@@ -32,6 +32,8 @@ void Dispatcher::init(const InfluenceTable *influence_table,
 
     local_character_ = local_character;
 
+    Screen_ctor(&screen_sm_,
+                this);
     Character_ctor(&character_sm_,
                    this,
                    local_character_->dogan,
@@ -45,15 +47,13 @@ void Dispatcher::init(const InfluenceTable *influence_table,
     KaTet_ctor(&ka_tet_sm_,
                this,
                &(local_character_->ka_tet_links));
-    Screen_ctor(&screen_sm_,
-                this);
 
     QEvt init_event = {Q_INIT_SIG};
 
+    QMSM_INIT(&(screen_sm_.super), &init_event);
     QMSM_INIT(&(character_sm_.super), &init_event);
     QMSM_INIT(&(ka_counter_sm_.super), &init_event);
     QMSM_INIT(&(ka_tet_sm_.super), &init_event);
-    QMSM_INIT(&(screen_sm_.super), &init_event);
 
     process_queue();
 
@@ -199,25 +199,25 @@ void Dispatcher::tick()
         }
     }
 
+    ScreenQEvt screen_event = {{TIME_TICK_1S_SIG}, 0, false, false};
+    QMSM_DISPATCH(&(screen_sm_.super), &(screen_event.super));
+
     CharacterQEvt character_event = {{INFLUENCE_AT_DOGAN_SIG}, dogan_effect};
     QMSM_DISPATCH(&(character_sm_.super), &(character_event.super));
 
     KaCounterQEvt ka_counter_event = {{TIME_TICK_1S_SIG}, 0};
     QMSM_DISPATCH(&(ka_counter_sm_.super), &(ka_counter_event.super));
 
-    ScreenQEvt screen_event = {{TIME_TICK_1S_SIG}, 0, false, false};
-    QMSM_DISPATCH(&(screen_sm_.super), &(screen_event.super));
-
     ticks_++;
 
     if (ticks_ >= 60) {
         ticks_ = 0;
 
-        ka_counter_event = {{TIME_TICK_1M_SIG}, 0};
-        QMSM_DISPATCH(&(ka_counter_sm_.super), &(ka_counter_event.super));
-
         screen_event = {{TIME_TICK_1M_SIG}, 0, false, false};
         QMSM_DISPATCH(&(screen_sm_.super), &(screen_event.super));
+
+        ka_counter_event = {{TIME_TICK_1M_SIG}, 0};
+        QMSM_DISPATCH(&(ka_counter_sm_.super), &(ka_counter_event.super));
     }
 
     process_queue();

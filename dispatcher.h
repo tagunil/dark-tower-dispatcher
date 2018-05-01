@@ -94,10 +94,10 @@ private:
 
     RingBuffer<QueueEntry, 32> queue_;
 
+    Screen screen_sm_;
     Character character_sm_;
     KaCounter ka_counter_sm_;
     KaTet ka_tet_sm_;
-    Screen screen_sm_;
 
     int ticks_;
 };
