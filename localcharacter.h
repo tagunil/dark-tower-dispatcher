@@ -70,6 +70,11 @@ public:
     static const size_t SIZE = CharacterTable::MAX_CHARACTER_COUNT;
 
 public:
+    KaTetCounters()
+        : counters_{}
+    {
+    }
+
     uint16_t &operator[](size_t index)
     {
         if (index >= SIZE) {
