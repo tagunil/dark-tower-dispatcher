@@ -36,7 +36,7 @@ void Dispatcher::init(const InfluenceTable *influence_table,
                    this,
                    local_character_->dogan,
                    local_character_->manni,
-                   false,
+                   local_character_->corrupted,
                    local_character_->dead);
     KaCounter_ctor(&ka_counter_sm_,
                    this,
