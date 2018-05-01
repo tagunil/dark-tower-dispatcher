@@ -66,14 +66,14 @@ void CharacterTable::init(void *file_context,
                 local_character->dogan = dogan_value;
             }
 
+            local_character->corrupted = false;
+
             const char *dead_field = table->field("isDead");
             if (dead_field) {
                 int dead_value = atoi(dead_field);
 
                 local_character->dead = dead_value != 0;
             }
-
-            local_character->corrupted = false;
 
             const char *manni_field = table->field("isManni");
             if (manni_field) {
