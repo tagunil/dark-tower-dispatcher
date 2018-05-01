@@ -55,6 +55,8 @@ void Dispatcher::init(const InfluenceTable *influence_table,
     QMSM_INIT(&(ka_tet_sm_.super), &init_event);
     QMSM_INIT(&(screen_sm_.super), &init_event);
 
+    process_queue();
+
     ticks_ = 0;
 }
 
@@ -85,6 +87,8 @@ void Dispatcher::handle_button(int id, bool long_press)
     case Buttons::Z:
         break;
     }
+
+    process_queue();
 }
 
 void Dispatcher::handle_radio_packet(uint8_t influence_id,
@@ -102,6 +106,8 @@ void Dispatcher::handle_radio_packet(uint8_t influence_id,
     }
 
     begin_influence(influence_id, parameter, influence->timeout);
+
+    process_queue();
 }
 
 void Dispatcher::handle_nfc_packet(uint8_t influence_id)
@@ -113,33 +119,17 @@ void Dispatcher::handle_nfc_packet(uint8_t influence_id)
     }
 
     begin_influence(influence_id, 0, 0);
+
+    process_queue();
 }
 
 void Dispatcher::begin_influence(size_t id,
                                  uint8_t parameter,
                                  int16_t timeout)
 {
-    (void)parameter;
-
     if (!influence_active(id)) {
-        uint8_t logical_id = static_cast<uint8_t>(id);
-        uint8_t character_id = CharacterTable::INVALID_CHARACTER;
-
-        if (logical_id >= CharacterTable::FIRST_CHARACTER) {
-            character_id = logical_id - CharacterTable::FIRST_CHARACTER;
-            logical_id = PERSON_NEAR_ID;
-        }
-
-        QSignal signal = static_cast<QSignal>(BEGIN_BY_ID(logical_id) + BASE_SIG);
-
-        CharacterQEvt character_event = {{signal}, 0};
-        QMSM_DISPATCH(&(character_sm_.super), &(character_event.super));
-
-        KaCounterQEvt ka_counter_event = {{signal}, character_id};
-        QMSM_DISPATCH(&(ka_counter_sm_.super), &(ka_counter_event.super));
-
-        KaTetQEvt ka_tet_event = {{signal}, character_id};
-        QMSM_DISPATCH(&(ka_tet_sm_.super), &(ka_tet_event.super));
+        QueueEntry entry = {id, QueueEntry::Action::Begin, parameter};
+        queue_.push(entry);
     }
 
     influence_states_[id].remaining_time = timeout;
@@ -150,26 +140,10 @@ void Dispatcher::begin_influence(size_t id,
 
 void Dispatcher::end_influence(size_t id)
 {
-    uint8_t logical_id = static_cast<uint8_t>(id);
-    uint8_t character_id = CharacterTable::INVALID_CHARACTER;
-
-    if (logical_id >= CharacterTable::FIRST_CHARACTER) {
-        character_id = logical_id - CharacterTable::FIRST_CHARACTER;
-        logical_id = PERSON_NEAR_ID;
-    }
-
-    QSignal signal = static_cast<QSignal>(END_BY_ID(logical_id) + BASE_SIG);
-
-    CharacterQEvt character_event = {{signal}, 0};
-    QMSM_DISPATCH(&(character_sm_.super), &(character_event.super));
-
-    KaCounterQEvt ka_counter_event = {{signal}, character_id};
-    QMSM_DISPATCH(&(ka_counter_sm_.super), &(ka_counter_event.super));
-
-    KaTetQEvt ka_tet_event = {{signal}, character_id};
-    QMSM_DISPATCH(&(ka_tet_sm_.super), &(ka_tet_event.super));
-
     influence_states_[id].remaining_time = 0;
+
+    QueueEntry entry = {id, QueueEntry::Action::End, 0};
+    queue_.push(entry);
 }
 
 bool Dispatcher::influence_active(size_t id)
@@ -221,5 +195,44 @@ void Dispatcher::tick()
 
         screen_event = {{TIME_TICK_1M_SIG}, 0, false, false};
         QMSM_DISPATCH(&(screen_sm_.super), &(screen_event.super));
+    }
+
+    process_queue();
+}
+
+void Dispatcher::process_queue()
+{
+    while (queue_.size() != 0) {
+        QueueEntry entry;
+        queue_.pop(entry);
+
+        uint8_t logical_id = static_cast<uint8_t>(entry.id);
+        uint8_t character_id = CharacterTable::INVALID_CHARACTER;
+
+        if (logical_id >= CharacterTable::FIRST_CHARACTER) {
+            character_id = logical_id - CharacterTable::FIRST_CHARACTER;
+            logical_id = PERSON_NEAR_ID;
+        }
+
+        QSignal signal = static_cast<QSignal>(BASE_SIG);
+        switch (entry.action) {
+        case QueueEntry::Action::Begin:
+            signal += static_cast<QSignal>(BEGIN_BY_ID(logical_id));
+            break;
+        case QueueEntry::Action::End:
+            signal += static_cast<QSignal>(END_BY_ID(logical_id));
+            break;
+        }
+
+        CharacterQEvt character_event = {{signal}, 0};
+        QMSM_DISPATCH(&(character_sm_.super), &(character_event.super));
+
+        KaCounterQEvt ka_counter_event = {{signal}, character_id};
+        QMSM_DISPATCH(&(ka_counter_sm_.super), &(ka_counter_event.super));
+
+        KaTetQEvt ka_tet_event = {{signal}, character_id};
+        QMSM_DISPATCH(&(ka_tet_sm_.super), &(ka_tet_event.super));
+
+        //TODO: music
     }
 }

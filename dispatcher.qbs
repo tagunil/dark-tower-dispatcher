@@ -29,6 +29,7 @@ Project {
             "qhsm.h",
             "qpc.h",
             "reasons.h",
+            "ringbuffer.h",
             "screen.cpp",
             "screen.h",
             "signals.h",
