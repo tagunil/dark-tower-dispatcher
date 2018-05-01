@@ -69,15 +69,14 @@ void Dispatcher::handle_button(int id, bool long_press)
 
     switch (id) {
     case Buttons::A:
-        break;
-    case Buttons::B:
         if (long_press) {
             screen_event = {{BTN_DEATH_LONG_SIG}, 0, false, false};
             QMSM_DISPATCH(&(screen_sm_.super), &(screen_event.super));
-        } else {
-            screen_event = {{BTN_NEXT_PICTURE_SIG}, 0, false, false};
-            QMSM_DISPATCH(&(screen_sm_.super), &(screen_event.super));
         }
+        break;
+    case Buttons::B:
+        screen_event = {{BTN_NEXT_PICTURE_SIG}, 0, false, false};
+        QMSM_DISPATCH(&(screen_sm_.super), &(screen_event.super));
         break;
     case Buttons::C:
         if (long_press) {
