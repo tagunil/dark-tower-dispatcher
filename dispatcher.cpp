@@ -241,9 +241,11 @@ void Dispatcher::process_queue()
         switch (entry.action) {
         case QueueEntry::Action::Begin:
             signal += static_cast<QSignal>(BEGIN_BY_ID(logical_id));
+            local_character_->near_characters.set(character_id, true);
             break;
         case QueueEntry::Action::End:
             signal += static_cast<QSignal>(END_BY_ID(logical_id));
+            local_character_->near_characters.set(character_id, false);
             break;
         }
 
