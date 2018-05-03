@@ -148,6 +148,11 @@ void Dispatcher::handle_nfc_packet(uint8_t influence_id)
     process_queue();
 }
 
+void Dispatcher::handle_track_end(int track)
+{
+    (void)track;
+}
+
 void Dispatcher::begin_influence(size_t id,
                                  uint8_t parameter,
                                  int16_t timeout)

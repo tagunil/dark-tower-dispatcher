@@ -71,6 +71,8 @@ public:
 
     void handle_nfc_packet(uint8_t influence_id);
 
+    void handle_track_end(int track);
+
     void begin_influence(size_t id,
                          uint8_t parameter = 0,
                          int16_t timeout = -1);

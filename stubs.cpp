@@ -36,6 +36,22 @@ void PlayerVolumeDown()
     printf("Volume down\n");
 }
 
+void PlayerStart(uint8_t SlotN, uint16_t Volume, const char* Emo, bool Repeat)
+{
+    printf("Start emotion %s in slot %u with volume %u and repeat mode %u\n",
+           Emo, SlotN, Volume, Repeat);
+}
+
+void PlayerSetVolume(uint8_t SlotN, uint16_t Volume)
+{
+    printf("Change emotion volume in slot %u to %u\n", SlotN, Volume);
+}
+
+void PlayerStop(uint8_t SlotN)
+{
+    printf("Stop emotion in slot %u\n", SlotN);
+}
+
 // Screen
 void ScreenHighlight(uint32_t Value_percent)
 {
