@@ -43,7 +43,8 @@ void Dispatcher::init(const InfluenceTable *influence_table,
     KaCounter_ctor(&ka_counter_sm_,
                    this,
                    &(local_character_->ka_tet_counters),
-                   &(local_character_->ka_tet_links));
+                   &(local_character_->ka_tet_links),
+                   &(local_character_->near_characters));
     KaTet_ctor(&ka_tet_sm_,
                this,
                &(local_character_->ka_tet_links));
