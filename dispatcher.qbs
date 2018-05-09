@@ -25,6 +25,8 @@ Project {
             "kaTet.h",
             "localcharacter.h",
             "main.cpp",
+            "player.cpp",
+            "player.h",
             "qhsm.c",
             "qhsm.h",
             "qpc.h",

@@ -8,6 +8,7 @@
 #include "charactertable.h"
 #include "localcharacter.h"
 #include "ringbuffer.h"
+#include "player.h"
 
 #include "character.h"
 #include "kaCounter.h"
@@ -76,6 +77,7 @@ public:
     void begin_influence(size_t id,
                          uint8_t parameter = 0,
                          int16_t timeout = -1);
+
     void end_influence(size_t id);
 
     bool influence_active(size_t id);
@@ -100,6 +102,8 @@ private:
     Character character_sm_;
     KaCounter ka_counter_sm_;
     KaTet ka_tet_sm_;
+
+    Player player_;
 
     int ticks_;
 };
