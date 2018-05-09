@@ -150,7 +150,7 @@ void Dispatcher::handle_nfc_packet(uint8_t influence_id)
     process_queue();
 }
 
-void Dispatcher::handle_track_end(int track)
+void Dispatcher::handle_track_end(size_t track)
 {
     player_.handle_track_end(track);
 }
