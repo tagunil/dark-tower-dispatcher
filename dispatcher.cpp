@@ -155,6 +155,14 @@ void Dispatcher::handle_track_end(int track)
     player_.handle_track_end(track);
 }
 
+void Dispatcher::handle_battery_status(uint8_t level,
+                                       bool charging,
+                                       bool connected)
+{
+    ScreenQEvt screen_event = {{BATTERY_INFO_SIG}, level, charging, connected};
+    QMSM_DISPATCH(&(screen_sm_.super), &(screen_event.super));
+}
+
 void Dispatcher::begin_influence(size_t id,
                                  uint8_t parameter,
                                  int16_t timeout)

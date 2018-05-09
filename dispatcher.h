@@ -74,6 +74,10 @@ public:
 
     void handle_track_end(int track);
 
+    void handle_battery_status(uint8_t level,
+                               bool charging,
+                               bool connected);
+
     void begin_influence(size_t id,
                          uint8_t parameter = 0,
                          int16_t timeout = -1);
