@@ -191,7 +191,7 @@ int main(int argc, char *argv[])
             if (tokens.size() >= 2) {
                 uint8_t influence_id = static_cast<uint8_t>(atoi(tokens[1]));
                 uint8_t parameter = 0;
-                int8_t strength = -1;
+                int8_t strength = 127;
 
                 if (tokens.size() >= 3) {
                     parameter = static_cast<uint8_t>(atoi(tokens[2]));
