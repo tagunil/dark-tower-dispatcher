@@ -234,6 +234,16 @@ int main(int argc, char *argv[])
                 printf("Insufficient parameters!\n");
             }
             break;
+        case 'e':
+            if (tokens.size() >= 2) {
+                size_t track_id = static_cast<size_t>(atoi(tokens[1]));
+
+                printf("Stopping track...\n");
+                dispatcher.handle_track_end(track_id);
+            } else {
+                printf("Insufficient parameters!\n");
+            }
+            break;
         case 'q':
             printf("Exiting...\n");
             return 0;
