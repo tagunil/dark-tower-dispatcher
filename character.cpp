@@ -153,7 +153,7 @@ QState Character_character(Character * const me, QEvt const * const e) {
         /* ${SMs::Character::SM::global::character::BEGIN(DOOR_FAR)+BASE} */
         case BEGIN(DOOR_FAR)+BASE_SIG: {
             if (me->Manni == true) {
-                    DISPATCH_END(DOOR_FAR_MANNI);
+                    DISPATCH_BEGIN(DOOR_FAR_MANNI);
                 }
             status_ = Q_HANDLED();
             break;
