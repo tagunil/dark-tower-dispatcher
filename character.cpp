@@ -207,6 +207,12 @@ QState Character_character(Character * const me, QEvt const * const e) {
             status_ = Q_HANDLED();
             break;
         }
+        /* ${SMs::Character::SM::global::character::END(ROSE)+BASE} */
+        case END(ROSE)+BASE_SIG: {
+            DISPATCH_END(FEAR);
+            status_ = Q_HANDLED();
+            break;
+        }
         default: {
             status_ = Q_SUPER(&Character_global);
             break;
@@ -273,6 +279,16 @@ QState Character_neutral(Character * const me, QEvt const * const e) {
         /* ${SMs::Character::SM::global::character::alive::neutral::BEGIN(DEATH)+BASE} */
         case BEGIN(DEATH)+BASE_SIG: {
             status_ = Q_TRAN(&Character_neutral_dead);
+            break;
+        }
+        /* ${SMs::Character::SM::global::character::alive::neutral::BEGIN(BECOME_CRIMSON_SERVANT)+BA~} */
+        case BEGIN(BECOME_CRIMSON_SERVANT)+BASE_SIG: {
+            status_ = Q_TRAN(&Character_crimsonish);
+            break;
+        }
+        /* ${SMs::Character::SM::global::character::alive::neutral::BEGIN(BECOME_WHITE_MESSENGER)+BA~} */
+        case BEGIN(BECOME_WHITE_MESSENGER)+BASE_SIG: {
+            status_ = Q_TRAN(&Character_whitish);
             break;
         }
         default: {
@@ -438,6 +454,12 @@ QState Character_red(Character * const me, QEvt const * const e) {
         /* ${SMs::Character::SM::global::character::alive::red::BEGIN(CRIMSON_BROADCAST4)+BASE} */
         case BEGIN(CRIMSON_BROADCAST4)+BASE_SIG: {
             DISPATCH_BEGIN(CRIMSON_BROADCAST4);
+            status_ = Q_HANDLED();
+            break;
+        }
+        /* ${SMs::Character::SM::global::character::alive::red::BEGIN(ROSE)+BASE} */
+        case BEGIN(ROSE)+BASE_SIG: {
+            DISPATCH_BEGIN(FEAR);
             status_ = Q_HANDLED();
             break;
         }
