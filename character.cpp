@@ -73,6 +73,7 @@ void Character_ctor(
                     break;
                 }
                 case CRIMSONISH: {
+                    me->DoganScale = CRIMSON_THRESHOLD;
                     me->StartState = (QStateHandler)&Character_crimsonish;
                     break;
                 }
@@ -81,6 +82,7 @@ void Character_ctor(
                     break;
                 }
                 case WHITISH: {
+                    me->DoganScale = WHITE_THRESHOLD;
                     me->StartState = (QStateHandler)&Character_whitish;
                     break;
                 }
@@ -97,7 +99,6 @@ void Character_ctor(
     me->dispatcher = dispatcher;
     QHsm_ctor(&me->super, Q_STATE_CAST(&Character_initial));
 }
-
 
 /*${SMs::Character} ........................................................*/
 /*${SMs::Character::SM} ....................................................*/
