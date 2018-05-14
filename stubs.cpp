@@ -84,6 +84,11 @@ void ScreenShowPicture(const char* AFilename)
 }
 
 // Character
+void SetTodash(bool Todash)
+{
+    printf("Set todash flag to %d\n", Todash);
+}
+
 void SaveState(int Dogan, bool Dead, bool Corrupted)
 {
     printf("State saved: %d %d %d\n", Dogan, Dead, Corrupted);
