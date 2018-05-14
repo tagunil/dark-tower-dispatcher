@@ -43,6 +43,7 @@ void Character_ctor(
     bool Dead)
 {
     me->Todash = false;
+    SetTodash(false);
     me->DoganScale = 0;
     me->Manni = Manni;
     if (Dead) {
@@ -135,8 +136,10 @@ QState Character_character(Character * const me, QEvt const * const e) {
         case BEGIN(DOOR)+BASE_SIG: {
             if (me->Todash == false) {
                     me->Todash = true;
+                    SetTodash(true);
                     DISPATCH_ONESHOT(DOOR_VOICE);
                 } else {
+                    SetTodash(false);
                     me->Todash = false;
                 }
             status_ = Q_HANDLED();
