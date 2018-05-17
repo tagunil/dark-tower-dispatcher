@@ -137,10 +137,11 @@ QState Character_character(Character * const me, QEvt const * const e) {
             if (me->Todash == false) {
                     me->Todash = true;
                     SetTodash(true);
-                    DISPATCH_ONESHOT(DOOR_VOICE);
+                    DISPATCH_BEGIN(DOOR_VOICE);
                 } else {
-                    SetTodash(false);
                     me->Todash = false;
+                    SetTodash(false);
+                    DISPATCH_END(DOOR_VOICE);
                 }
             status_ = Q_HANDLED();
             break;
@@ -241,7 +242,8 @@ QState Character_neutral(Character * const me, QEvt const * const e) {
     switch (e->sig) {
         /* ${SMs::Character::SM::global::character::alive::neutral} */
         case Q_ENTRY_SIG: {
-            Vibro(LONG_VIBRO);
+            me->DoganScale = 0;
+                Vibro(LONG_VIBRO, 3);
                 DISPATCH_ONESHOT(BECOME_NEUTRAL);
                 ScreenAddBMPToQueue("Neutral.bmp");
                 SaveState(NEUTRAL, false, false);
@@ -266,8 +268,8 @@ QState Character_neutral(Character * const me, QEvt const * const e) {
         }
         /* ${SMs::Character::SM::global::character::alive::neutral::INFLUENCE_AT_DOGAN} */
         case INFLUENCE_AT_DOGAN_SIG: {
-            me->DoganScale += ((const CharacterQEvt*)e)->amount;
             /* ${SMs::Character::SM::global::character::alive::neutral::INFLUENCE_AT_DOG~::[me->DoganScale>=WHITE_THRESHOLD~} */
+            me->DoganScale += ((const CharacterQEvt*)e)->amount;
             if (me->DoganScale>=WHITE_THRESHOLD) {
                 status_ = Q_TRAN(&Character_whitish);
             }
@@ -336,7 +338,7 @@ QState Character_white(Character * const me, QEvt const * const e) {
     switch (e->sig) {
         /* ${SMs::Character::SM::global::character::alive::whiten::white} */
         case Q_ENTRY_SIG: {
-            Vibro(LONG_VIBRO); ScreenShowPicture("White.bmp");
+            Vibro(LONG_VIBRO, 3); ScreenShowPicture("White.bmp");
                 DISPATCH_ONESHOT(BECOME_WHITE);
                 ScreenAddBMPToQueue("White.bmp");
                 DISPATCH_ONESHOT(DESTROY_KATET);
@@ -368,7 +370,7 @@ QState Character_whitish(Character * const me, QEvt const * const e) {
     switch (e->sig) {
         /* ${SMs::Character::SM::global::character::alive::whiten::whitish} */
         case Q_ENTRY_SIG: {
-            Vibro(LONG_VIBRO);
+            Vibro(LONG_VIBRO, 3);
                 DISPATCH_ONESHOT(BECOME_WHITISH);
                 ScreenAddBMPToQueue("BecomeWhiter.bmp");
                 SaveState(WHITISH, false, false);
@@ -485,7 +487,7 @@ QState Character_crimsonish(Character * const me, QEvt const * const e) {
     switch (e->sig) {
         /* ${SMs::Character::SM::global::character::alive::red::crimsonish} */
         case Q_ENTRY_SIG: {
-            Vibro(LONG_VIBRO);
+            Vibro(LONG_VIBRO, 3);
                 DISPATCH_ONESHOT(BECOME_CRIMSONISH);
                 ScreenAddBMPToQueue("Crimsonish.bmp");
                 SaveState(CRIMSONISH, false, false);
@@ -549,7 +551,7 @@ QState Character_crimson(Character * const me, QEvt const * const e) {
     switch (e->sig) {
         /* ${SMs::Character::SM::global::character::alive::red::crimson} */
         case Q_ENTRY_SIG: {
-            Vibro(LONG_VIBRO);
+            Vibro(LONG_VIBRO, 3);
                 DISPATCH_ONESHOT(BECOME_CRIMSON);
                 ScreenAddBMPToQueue("Crimson.bmp");
                 DISPATCH_ONESHOT(DESTROY_KATET);
@@ -581,7 +583,7 @@ QState Character_corrupted(Character * const me, QEvt const * const e) {
     switch (e->sig) {
         /* ${SMs::Character::SM::global::character::alive::red::corrupted} */
         case Q_ENTRY_SIG: {
-            Vibro(LONG_VIBRO);
+            Vibro(LONG_VIBRO, 3);
                 DISPATCH_ONESHOT(BECOME_CORRUPTED);
                 ScreenAddBMPToQueue("Corrupted.bmp");
                 SaveState(CRIMSONISH, false, true);

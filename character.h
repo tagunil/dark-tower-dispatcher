@@ -29,16 +29,14 @@ extern "C" {
 #define CRIMSONISH -1
 #define WHITISH 1
 #define WHITE 2
-#define WHITE_THRESHOLD 600
-#define CRIMSON_THRESHOLD -800
+#define WHITE_THRESHOLD 3600
+#define CRIMSON_THRESHOLD -4000
 #define LONG_VIBRO  300
 #define MEDIUM_VIBRO 200
 #define SHORT_VIBRO 100
 
 
 class Dispatcher;
-
-
 
 /*${SMs::Character} ........................................................*/
 typedef struct {

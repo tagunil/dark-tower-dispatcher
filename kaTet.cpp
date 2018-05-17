@@ -98,8 +98,8 @@ QState KaTet_has_katet(KaTet * const me, QEvt const * const e) {
         /* ${SMs::KaTet::SM::global::has_katet::BEGIN(FORM_KATET)+BASE} */
         case BEGIN(FORM_KATET)+BASE_SIG: {
             (me->KaTets)->set(((const KaTetQEvt*)e)->id, true);
-                ScreenAddBMPToQueue("Ka_tet.bmp");
-                Vibro(MEDIUM_VIBRO);
+                ScreenAddBMPToQueue("Katet.bmp");
+                Vibro(MEDIUM_VIBRO, 2);
                 SaveKatet(me->KaTets);
             status_ = Q_HANDLED();
             break;
@@ -108,6 +108,7 @@ QState KaTet_has_katet(KaTet * const me, QEvt const * const e) {
         case BEGIN(DESTROY_KATET)+BASE_SIG: {
             (me->KaTets)->clear();
                 SaveKatet(me->KaTets);
+                DISPATCH_ONESHOT(KATET_DESTROYED);
             status_ = Q_TRAN(&KaTet_alone);
             break;
         }
@@ -210,7 +211,7 @@ QState KaTet_alone(KaTet * const me, QEvt const * const e) {
         case BEGIN(FORM_KATET)+BASE_SIG: {
             (me->KaTets)->set(((const KaTetQEvt*)e)->id, true);
                 ScreenAddBMPToQueue("Ka_tet.bmp");
-                Vibro(MEDIUM_VIBRO);
+                Vibro(MEDIUM_VIBRO, 2);
             status_ = Q_TRAN(&KaTet_faraway);
             break;
         }
