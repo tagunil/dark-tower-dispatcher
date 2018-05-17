@@ -8,7 +8,7 @@
  *
  * !!! DO NOT EDIT !!!
  *
- * Generated at 2018-05-17 14:06:50
+ * Generated at 2018-05-18 00:13:56
  */
 #ifndef REASONS_H
 #define REASONS_H
@@ -86,6 +86,11 @@ enum
     NEUTRALIZE_ID = 69,
     BECOME_WHITE_MESSENGER_ID = 70,
     KATET_DESTROYED_ID = 71,
+    ROBOT_ID = 72,
+    BROADCAST1_ID = 73,
+    BROADCAST2_ID = 74,
+    BROADCAST3_ID = 75,
+    BROADCAST4_ID = 76,
     JRight_ID = 128,
     CRandall_ID = 129,
     RDias_ID = 130,
@@ -166,6 +171,7 @@ enum
     SaManson_ID = 205,
     RGato_ID = 206,
     HYork_ID = 207,
+    JSallivan_ID = 208,
 };
 
 #endif // ifdef REASONS_H
