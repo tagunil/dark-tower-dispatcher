@@ -164,7 +164,7 @@ QState Character_character(Character * const me, QEvt const * const e) {
         }
         /* ${SMs::Character::SM::global::character::END(DOOR_FAR)+BASE} */
         case END(DOOR_FAR)+BASE_SIG: {
-            DISPATCH_BEGIN(DOOR_FAR_MANNI);
+            DISPATCH_END(DOOR_FAR_MANNI);
             status_ = Q_HANDLED();
             break;
         }
@@ -190,25 +190,25 @@ QState Character_character(Character * const me, QEvt const * const e) {
         }
         /* ${SMs::Character::SM::global::character::END(CRIMSON_BROADCAST1)+BASE} */
         case END(CRIMSON_BROADCAST1)+BASE_SIG: {
-            DISPATCH_END(CRIMSON_BROADCAST1);
+            DISPATCH_END(BROADCAST1);
             status_ = Q_HANDLED();
             break;
         }
         /* ${SMs::Character::SM::global::character::END(CRIMSON_BROADCAST2)+BASE} */
         case END(CRIMSON_BROADCAST2)+BASE_SIG: {
-            DISPATCH_END(CRIMSON_BROADCAST2);
+            DISPATCH_END(BROADCAST2);
             status_ = Q_HANDLED();
             break;
         }
         /* ${SMs::Character::SM::global::character::END(CRIMSON_BROADCAST3)+BASE} */
         case END(CRIMSON_BROADCAST3)+BASE_SIG: {
-            DISPATCH_END(CRIMSON_BROADCAST3);
+            DISPATCH_END(BROADCAST3);
             status_ = Q_HANDLED();
             break;
         }
         /* ${SMs::Character::SM::global::character::END(CRIMSON_BROADCAST4)+BASE} */
         case END(CRIMSON_BROADCAST4)+BASE_SIG: {
-            DISPATCH_END(CRIMSON_BROADCAST4);
+            DISPATCH_END(BROADCAST4);
             status_ = Q_HANDLED();
             break;
         }
@@ -372,7 +372,7 @@ QState Character_whitish(Character * const me, QEvt const * const e) {
         case Q_ENTRY_SIG: {
             Vibro(LONG_VIBRO, 3);
                 DISPATCH_ONESHOT(BECOME_WHITISH);
-                ScreenAddBMPToQueue("BecomeWhiter.bmp");
+                ScreenAddBMPToQueue("Whitish.bmp");
                 SaveState(WHITISH, false, false);
             status_ = Q_HANDLED();
             break;
@@ -441,24 +441,24 @@ QState Character_red(Character * const me, QEvt const * const e) {
         }
         /* ${SMs::Character::SM::global::character::alive::red::BEGIN(CRIMSON_BROADCAST1)+BASE} */
         case BEGIN(CRIMSON_BROADCAST1)+BASE_SIG: {
-            DISPATCH_BEGIN(CRIMSON_BROADCAST1);
+            DISPATCH_BEGIN(BROADCAST1);
             status_ = Q_HANDLED();
             break;
         }
         /* ${SMs::Character::SM::global::character::alive::red::BEGIN(CRIMSON_BROADCAST2)+BASE} */
         case BEGIN(CRIMSON_BROADCAST2)+BASE_SIG: {
-            DISPATCH_BEGIN(CRIMSON_BROADCAST2);
+            DISPATCH_BEGIN(BROADCAST2);
             status_ = Q_HANDLED();
             break;
         }
         /* ${SMs::Character::SM::global::character::alive::red::BEGIN(CRIMSON_BROADCAST3)+BASE} */
         case BEGIN(CRIMSON_BROADCAST3)+BASE_SIG: {
-            DISPATCH_BEGIN(CRIMSON_BROADCAST3);
+            DISPATCH_BEGIN(BROADCAST3);
             status_ = Q_HANDLED();
             break;
         }
         /* ${SMs::Character::SM::global::character::alive::red::BEGIN(CRIMSON_BROADCAST4)+BASE} */
-        case BEGIN(CRIMSON_BROADCAST4)+BASE_SIG: {
+        case BEGIN(BROADCAST4)+BASE_SIG: {
             DISPATCH_BEGIN(CRIMSON_BROADCAST4);
             status_ = Q_HANDLED();
             break;
@@ -466,6 +466,7 @@ QState Character_red(Character * const me, QEvt const * const e) {
         /* ${SMs::Character::SM::global::character::alive::red::BEGIN(ROSE)+BASE} */
         case BEGIN(ROSE)+BASE_SIG: {
             DISPATCH_BEGIN(FEAR);
+            ScreenAddBMPToQueue("Fear.bmp");
             status_ = Q_HANDLED();
             break;
         }
@@ -724,25 +725,25 @@ QState Character_crimson_dead(Character * const me, QEvt const * const e) {
         }
         /* ${SMs::Character::SM::global::character::dead::crimson_dead::BEGIN(CRIMSON_BROADCAST1)+BASE} */
         case BEGIN(CRIMSON_BROADCAST1)+BASE_SIG: {
-            DISPATCH_BEGIN(CRIMSON_BROADCAST1);
+            DISPATCH_BEGIN(BROADCAST1);
             status_ = Q_HANDLED();
             break;
         }
         /* ${SMs::Character::SM::global::character::dead::crimson_dead::BEGIN(CRIMSON_BROADCAST2)+BASE} */
         case BEGIN(CRIMSON_BROADCAST2)+BASE_SIG: {
-            DISPATCH_BEGIN(CRIMSON_BROADCAST2);
+            DISPATCH_BEGIN(BROADCAST2);
             status_ = Q_HANDLED();
             break;
         }
         /* ${SMs::Character::SM::global::character::dead::crimson_dead::BEGIN(CRIMSON_BROADCAST3)+BASE} */
         case BEGIN(CRIMSON_BROADCAST3)+BASE_SIG: {
-            DISPATCH_BEGIN(CRIMSON_BROADCAST3);
+            DISPATCH_BEGIN(BROADCAST3);
             status_ = Q_HANDLED();
             break;
         }
         /* ${SMs::Character::SM::global::character::dead::crimson_dead::BEGIN(CRIMSON_BROADCAST4)+BASE} */
         case BEGIN(CRIMSON_BROADCAST4)+BASE_SIG: {
-            DISPATCH_BEGIN(CRIMSON_BROADCAST4);
+            DISPATCH_BEGIN(BROADCAST4);
             status_ = Q_HANDLED();
             break;
         }

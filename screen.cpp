@@ -160,6 +160,9 @@ QState Screen_active(Screen * const me, QEvt const * const e) {
         /* ${SMs::Screen::SM::global::ScreenButtons::active::BTN_NEXT_PICTURE} */
         case BTN_NEXT_PICTURE_SIG: {
             ScreenShowNextBMP();
+            if (GetBMPQueueLength() == 0) {
+                  ScreenShowPicture("Unlocked.bmp");
+            }
             status_ = Q_HANDLED();
             break;
         }
@@ -184,7 +187,7 @@ QState Screen_active(Screen * const me, QEvt const * const e) {
         /* ${SMs::Screen::SM::global::ScreenButtons::active::BTN_PRESSED} */
         case BTN_PRESSED_SIG: {
             me->timer = 0;
-                if(GetBMPQueueLength()>0) {
+                if(GetBMPQueueLength() > 0) {
                     ScreenShowActualBMP();
                 } else{
                     if (me->Background == false) {
@@ -271,6 +274,15 @@ QState Screen_locked(Screen * const me, QEvt const * const e) {
             break;
         }
         /* ${SMs::Screen::SM::global::ScreenButtons::locked::BTN_PRESSED} */
+
+        case BTN_NEXT_PICTURE_SIG: {
+            ScreenShowNextBMP();
+            if (GetBMPQueueLength() == 0) {
+                ScreenShowPicture("Locked.bmp");
+            }
+            status_ = Q_HANDLED();
+            break;
+        }
         case BTN_PRESSED_SIG: {
             if (me->Background == false) {
                     ScreenShowPicture("Locked.bmp");

@@ -198,6 +198,7 @@ QState KaTet_alone(KaTet * const me, QEvt const * const e) {
         /* ${SMs::KaTet::SM::global::alone::BEGIN(FEAR_PLACE)+BASE} */
         case BEGIN(FEAR_PLACE)+BASE_SIG: {
             DISPATCH_BEGIN(FEAR);
+            ScreenAddBMPToQueue("Fear.bmp");
             status_ = Q_HANDLED();
             break;
         }
