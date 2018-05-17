@@ -5,9 +5,9 @@
 #include "localcharacter.h"
 
 // General
-void Vibro(uint32_t Duration_ms)
+void Vibro(uint32_t Duration_ms, int count)
 {
-    printf("Vibration for %u ms\n", Duration_ms);
+    printf("Vibration for %u ms, %d times\n", Duration_ms, count);
 }
 
 void PowerOff()
