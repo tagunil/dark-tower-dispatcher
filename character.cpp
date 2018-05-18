@@ -467,6 +467,7 @@ QState Character_red(Character * const me, QEvt const * const e) {
         case BEGIN(ROSE)+BASE_SIG: {
             DISPATCH_BEGIN(FEAR);
             ScreenAddBMPToQueue("Fear.bmp");
+            Vibro(SHORT_VIBRO, 5);
             status_ = Q_HANDLED();
             break;
         }

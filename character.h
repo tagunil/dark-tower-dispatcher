@@ -31,9 +31,9 @@ extern "C" {
 #define WHITE 2
 #define WHITE_THRESHOLD 3600
 #define CRIMSON_THRESHOLD -4000
-#define LONG_VIBRO  300
-#define MEDIUM_VIBRO 200
-#define SHORT_VIBRO 100
+#define LONG_VIBRO  800
+#define MEDIUM_VIBRO 500
+#define SHORT_VIBRO 300
 
 
 class Dispatcher;
