@@ -24,9 +24,6 @@ extern "C" {
 #include "qhsm.h"    /* include own framework */
 #include "localcharacter.h"
 
-#define MEDIUM_VIBRO 200
-
-
 class Dispatcher;
 
 

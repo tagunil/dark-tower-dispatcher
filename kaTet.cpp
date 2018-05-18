@@ -30,6 +30,7 @@
 
 //Q_DEFINE_THIS_FILE
 
+#define MEDIUM_VIBRO 200
 
 /* global-scope definitions -----------------------------------------*/
 
