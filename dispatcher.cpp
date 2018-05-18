@@ -128,11 +128,16 @@ void Dispatcher::handle_radio_packet(uint8_t influence_id,
         return;
     }
 
-    if (strength < influence->strength) {
+    const InfluenceTable::Influence *effective_influence = influence;
+    if (influence_id >= CharacterTable::FIRST_CHARACTER) {
+        effective_influence = influence_table_->influence(PERSON_NEAR_ID);
+    }
+
+    if (strength < effective_influence->strength) {
         return;
     }
 
-    begin_influence(influence_id, parameter, influence->timeout);
+    begin_influence(influence_id, parameter, effective_influence->timeout);
 
     process_queue();
 }
