@@ -53,9 +53,11 @@ int main(int argc, char *argv[])
         return 1;
     }
 
+    const int8_t strength_levels[] = {127, 0, -64, -96};
     influence_table.init(influence_file,
                          &csv_table,
-                         &emotion_table);
+                         &emotion_table,
+                         strength_levels);
 
     fclose(influence_file);
 
