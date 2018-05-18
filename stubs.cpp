@@ -4,6 +4,8 @@
 
 #include "localcharacter.h"
 
+static bool sleeping_ = false;
+
 // General
 void Vibro(uint32_t Duration_ms, int count)
 {
@@ -18,11 +20,18 @@ void PowerOff()
 void SleepEnable()
 {
     printf("Enable sleep\n");
+    sleeping_ = true;
 }
 
 void SleepDisable()
 {
     printf("Disable sleep\n");
+    sleeping_ = false;
+}
+
+bool IsSleeping()
+{
+    return sleeping_;
 }
 
 // Sound
@@ -61,6 +70,7 @@ void ScreenHighlight(uint32_t Value_percent)
 void ScreenAddBMPToQueue(const char* AFilename)
 {
     printf("File %s added to queue\n", AFilename);
+    sleeping_ = false;
 }
 
 void ScreenShowNextBMP()
@@ -80,7 +90,8 @@ uint32_t GetBMPQueueLength()
 
 void ScreenShowPicture(const char* AFilename)
 {
-        printf("File %s displayed\n", AFilename);
+    printf("File %s displayed\n", AFilename);
+    sleeping_ = false;
 }
 
 // Character
