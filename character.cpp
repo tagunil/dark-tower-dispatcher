@@ -173,7 +173,7 @@ QState Character_character(Character * const me, QEvt const * const e) {
         }
         /* ${SMs::Character::SM::global::character::END(DOOR_NEAR)+BASE} */
         case END(DOOR_NEAR)+BASE_SIG: {
-            DISPATCH_BEGIN(DOOR_NEAR_MANNI);
+            DISPATCH_END(DOOR_NEAR_MANNI);
             status_ = Q_HANDLED();
             break;
         }
