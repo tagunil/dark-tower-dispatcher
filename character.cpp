@@ -464,8 +464,8 @@ QState Character_red(Character * const me, QEvt const * const e) {
             break;
         }
         /* ${SMs::Character::SM::global::character::alive::red::BEGIN(CRIMSON_BROADCAST4)+BASE} */
-        case BEGIN(BROADCAST4)+BASE_SIG: {
-            DISPATCH_BEGIN(CRIMSON_BROADCAST4);
+        case BEGIN(CRIMSON_BROADCAST4)+BASE_SIG: {
+            DISPATCH_BEGIN(BROADCAST4);
             status_ = Q_HANDLED();
             break;
         }
@@ -565,7 +565,7 @@ QState Character_crimson(Character * const me, QEvt const * const e) {
                 DISPATCH_ONESHOT(BECOME_CRIMSON);
                 ScreenAddBMPToQueue("Crimson.bmp");
                 DISPATCH_ONESHOT(DESTROY_KATET);
-                SaveState(CRIMSON, false, true);
+                SaveState(CRIMSON, false, false);
             status_ = Q_HANDLED();
             break;
         }
@@ -708,7 +708,7 @@ QState Character_crimson_dead(Character * const me, QEvt const * const e) {
     switch (e->sig) {
         /* ${SMs::Character::SM::global::character::dead::crimson_dead} */
         case Q_ENTRY_SIG: {
-            SaveState(CRIMSON, true, true);
+            SaveState(CRIMSON, true, false);
             status_ = Q_HANDLED();
             break;
         }
